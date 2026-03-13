@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { Instagram, Youtube, Facebook } from "lucide-react";
 import logo from "@/assets/logo-telesena.png";
+import logoGSS from "@/assets/logo-gss.png";
 import bannerCarnaval from "@/assets/banner-carnaval.png";
 import bannerSemanal from "@/assets/banner-semanal.png";
 import { categories } from "@/data/posts";
@@ -117,8 +118,7 @@ const BlogFooter = () => {
         <div className="container mx-auto py-10 px-4">
           <div className="flex items-center justify-center gap-10 mb-8">
             <div className="text-center">
-              <div className="text-3xl font-bold leading-none tracking-tight">S</div>
-              <div className="text-[10px] uppercase tracking-widest mt-1 opacity-80">Grupo<br />Silvio Santos</div>
+              <img src={logoGSS} alt="Grupo Silvio Santos" className="h-12 brightness-0 invert" />
             </div>
             <div className="text-center">
               <div className="text-2xl font-bold tracking-tight">liderança</div>
