@@ -4,6 +4,7 @@ import logo from "@/assets/logo-telesena.png";
 import logoGSS from "@/assets/logo-gss.png";
 import bannerCarnaval from "@/assets/banner-carnaval.png";
 import bannerSemanal from "@/assets/banner-semanal.png";
+import logoLideranca from "@/assets/logo-lideranca.png";
 import { categories } from "@/data/posts";
 
 const BlogFooter = () => {
