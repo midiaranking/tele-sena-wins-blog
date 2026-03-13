@@ -179,14 +179,12 @@ const BlogHeader = () => {
                   {group.label}
                 </div>
                 {group.items.map((item) => (
-                  <Link
-                    key={item.slug}
-                    to={`/categoria/${item.slug}`}
+                  <MenuItemLink
+                    key={item.slug || item.href}
+                    item={item}
                     onClick={() => setMobileOpen(false)}
                     className="block px-6 py-2.5 text-sm font-medium text-foreground hover:text-primary hover:bg-secondary rounded-lg transition-colors"
-                  >
-                    {item.name}
-                  </Link>
+                  />
                 ))}
               </div>
             ))}
