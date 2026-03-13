@@ -83,7 +83,7 @@ const BlogHeader = () => {
       {/* Top row */}
       <div className="container mx-auto flex items-center justify-between py-4 gap-6">
         <Link to="/" className="shrink-0">
-          <img src={logo} alt="Tele Sena" className="h-12 md:h-16" />
+          <img src={logo} alt="Tele Sena" className="h-14 md:h-16" />
         </Link>
 
         <div className="hidden md:flex flex-1 max-w-xl relative">
