@@ -3,18 +3,25 @@ import { Link } from "react-router-dom";
 import { Search, Menu, X, ChevronDown } from "lucide-react";
 import logo from "@/assets/logo-telesena.png";
 
+interface MenuItem {
+  name: string;
+  slug?: string;
+  href?: string;
+}
+
 interface MenuGroup {
   label: string;
-  items: { name: string; slug: string }[];
+  items: MenuItem[];
 }
 
 const menuGroups: MenuGroup[] = [
   {
     label: "Tele Sena",
     items: [
-      { name: "Entender a Tele Sena", slug: "entender-a-tele-sena" },
-      { name: "Concorrer a Prêmios", slug: "concorrer-a-premios" },
-      { name: "Realizar um Sonho", slug: "realizar-um-sonho" },
+      { name: "Conheça Tele Sena", href: "https://www.telesena.com.br/conheca-as-telesenas" },
+      { name: "Concorrer a Prêmios", href: "https://www.telesena.com.br/comprar" },
+      { name: "Realizar um Sonho", href: "https://www.telesena.com.br/" },
+      { name: "Contato", href: "https://atendimento.telesena.com.br/#/" },
     ],
   },
   {
@@ -50,6 +57,21 @@ const menuGroups: MenuGroup[] = [
     ],
   },
 ];
+
+const MenuItemLink = ({ item, className, onClick }: { item: MenuItem; className?: string; onClick?: () => void }) => {
+  if (item.href) {
+    return (
+      <a href={item.href} target="_blank" rel="noopener noreferrer" className={className} onClick={onClick}>
+        {item.name}
+      </a>
+    );
+  }
+  return (
+    <Link to={`/categoria/${item.slug}`} className={className} onClick={onClick}>
+      {item.name}
+    </Link>
+  );
+};
 
 const BlogHeader = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
