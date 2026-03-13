@@ -23,12 +23,16 @@ const BlogFooter = () => {
       <footer className="bg-primary text-primary-foreground">
         <div className="container mx-auto py-12 px-4">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
-            {/* Logo & about */}
-            <div>
-              <img src={logo} alt="Tele Sena" className="h-10 mb-4" />
-              <p className="text-sm opacity-80 leading-relaxed">
-                Blog da Tele Sena — dicas de educação financeira, renda extra e tudo sobre a Tele Sena para você realizar seus sonhos.
-              </p>
+          {/* Logo centered */}
+          <div className="col-span-1 md:col-span-2 lg:col-span-5 flex justify-center mb-6">
+            <img src={logo} alt="Tele Sena" className="h-14" />
+          </div>
+
+          {/* About */}
+          <div>
+            <p className="text-sm opacity-80 leading-relaxed">
+              Blog da Tele Sena — dicas de educação financeira, renda extra e tudo sobre a Tele Sena para você realizar seus sonhos.
+            </p>
               <div className="flex gap-3 mt-5">
                 <a href="#" className="w-10 h-10 rounded-lg bg-primary-foreground/10 hover:bg-primary-foreground/20 flex items-center justify-center transition-colors" aria-label="Instagram">
                   <Instagram className="w-5 h-5" />
