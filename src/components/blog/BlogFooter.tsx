@@ -25,7 +25,7 @@ const BlogFooter = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
             {/* Logo & about */}
             <div>
-              <img src={logo} alt="Tele Sena" className="h-10 mb-4 brightness-0 invert" />
+              <img src={logo} alt="Tele Sena" className="h-10 mb-4" />
               <p className="text-sm opacity-80 leading-relaxed">
                 Blog da Tele Sena — dicas de educação financeira, renda extra e tudo sobre a Tele Sena para você realizar seus sonhos.
               </p>
