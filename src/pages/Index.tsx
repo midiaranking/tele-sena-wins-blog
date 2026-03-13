@@ -6,6 +6,7 @@ import PostCard from "@/components/blog/PostCard";
 import Sidebar from "@/components/blog/Sidebar";
 import ThematicSection from "@/components/blog/ThematicSection";
 import BannerCTA from "@/components/blog/BannerCTA";
+import ContentCarousel from "@/components/blog/ContentCarousel";
 import { posts, categories, getPostsByCategory } from "@/data/posts";
 
 const POSTS_PER_PAGE = 6;
@@ -56,6 +57,12 @@ const Index = () => {
           </div>
         </div>
       </section>
+
+      {/* Content Carousel */}
+      <ContentCarousel
+        posts={posts.filter((_, i) => i >= 3 && i < 10)}
+        title="Explore nossos conteúdos"
+      />
 
       {/* CTA banner */}
       <section className="py-10 bg-secondary">
