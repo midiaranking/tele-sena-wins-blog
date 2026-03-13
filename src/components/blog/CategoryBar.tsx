@@ -7,7 +7,7 @@ const CategoryBar = () => {
   return (
     <div className="border-b border-border bg-background">
       <div className="container mx-auto">
-        <div className="flex gap-2 py-3 overflow-x-auto scrollbar-hide">
+        <div className="flex flex-wrap gap-2 py-3">
           <Link
             to="/"
             className={`shrink-0 px-4 py-2 rounded-full text-sm font-medium border transition-colors ${

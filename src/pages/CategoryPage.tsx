@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import BlogLayout from "@/components/blog/BlogLayout";
-import CategoryBar from "@/components/blog/CategoryBar";
+
 import PostCard from "@/components/blog/PostCard";
 import Sidebar from "@/components/blog/Sidebar";
 import { categories, getPostsByCategory } from "@/data/posts";
@@ -29,7 +29,6 @@ const CategoryPage = () => {
 
   return (
     <BlogLayout>
-      <CategoryBar />
 
       <section className="py-10">
         <div className="container mx-auto">
