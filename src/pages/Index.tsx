@@ -58,6 +58,12 @@ const Index = () => {
         </div>
       </section>
 
+      {/* Content Carousel */}
+      <ContentCarousel
+        posts={posts.filter((_, i) => i >= 3 && i < 10)}
+        title="Explore nossos conteúdos"
+      />
+
       {/* CTA banner */}
       <section className="py-10 bg-secondary">
         <div className="container mx-auto max-w-3xl">
