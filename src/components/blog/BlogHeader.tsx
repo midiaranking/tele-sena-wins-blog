@@ -3,18 +3,25 @@ import { Link } from "react-router-dom";
 import { Search, Menu, X, ChevronDown } from "lucide-react";
 import logo from "@/assets/logo-telesena.png";
 
+interface MenuItem {
+  name: string;
+  slug?: string;
+  href?: string;
+}
+
 interface MenuGroup {
   label: string;
-  items: { name: string; slug: string }[];
+  items: MenuItem[];
 }
 
 const menuGroups: MenuGroup[] = [
   {
     label: "Tele Sena",
     items: [
-      { name: "Entender a Tele Sena", slug: "entender-a-tele-sena" },
-      { name: "Concorrer a Prêmios", slug: "concorrer-a-premios" },
-      { name: "Realizar um Sonho", slug: "realizar-um-sonho" },
+      { name: "Conheça Tele Sena", href: "https://www.telesena.com.br/conheca-as-telesenas" },
+      { name: "Concorrer a Prêmios", href: "https://www.telesena.com.br/comprar" },
+      { name: "Realizar um Sonho", href: "https://www.telesena.com.br/" },
+      { name: "Contato", href: "https://atendimento.telesena.com.br/#/" },
     ],
   },
   {
@@ -50,6 +57,21 @@ const menuGroups: MenuGroup[] = [
     ],
   },
 ];
+
+const MenuItemLink = ({ item, className, onClick }: { item: MenuItem; className?: string; onClick?: () => void }) => {
+  if (item.href) {
+    return (
+      <a href={item.href} target="_blank" rel="noopener noreferrer" className={className} onClick={onClick}>
+        {item.name}
+      </a>
+    );
+  }
+  return (
+    <Link to={`/categoria/${item.slug}`} className={className} onClick={onClick}>
+      {item.name}
+    </Link>
+  );
+};
 
 const BlogHeader = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -122,13 +144,11 @@ const BlogHeader = () => {
         <nav className="container mx-auto flex items-center justify-center gap-1 py-2">
           {menuGroups.map((group) =>
             group.items.length === 1 ? (
-              <Link
+              <MenuItemLink
                 key={group.label}
-                to={`/categoria/${group.items[0].slug}`}
+                item={group.items[0]}
                 className="px-4 py-2 text-sm font-medium text-foreground hover:text-primary transition-colors"
-              >
-                {group.label}
-              </Link>
+              />
             ) : (
               <div key={group.label} className="relative group">
                 <button className="flex items-center gap-1 px-4 py-2 text-sm font-medium text-foreground hover:text-primary transition-colors">
@@ -136,13 +156,11 @@ const BlogHeader = () => {
                 </button>
                 <div className="absolute top-full left-0 mt-1 bg-background rounded-xl ts-shadow border border-border py-2 min-w-[220px] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-50">
                   {group.items.map((item) => (
-                    <Link
-                      key={item.slug}
-                      to={`/categoria/${item.slug}`}
+                    <MenuItemLink
+                      key={item.slug || item.href}
+                      item={item}
                       className="block px-5 py-2.5 text-sm text-foreground hover:text-primary hover:bg-secondary transition-colors"
-                    >
-                      {item.name}
-                    </Link>
+                    />
                   ))}
                 </div>
               </div>
@@ -161,14 +179,12 @@ const BlogHeader = () => {
                   {group.label}
                 </div>
                 {group.items.map((item) => (
-                  <Link
-                    key={item.slug}
-                    to={`/categoria/${item.slug}`}
+                  <MenuItemLink
+                    key={item.slug || item.href}
+                    item={item}
                     onClick={() => setMobileOpen(false)}
                     className="block px-6 py-2.5 text-sm font-medium text-foreground hover:text-primary hover:bg-secondary rounded-lg transition-colors"
-                  >
-                    {item.name}
-                  </Link>
+                  />
                 ))}
               </div>
             ))}
