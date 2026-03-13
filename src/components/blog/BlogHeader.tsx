@@ -17,22 +17,22 @@ const BlogHeader = () => {
         </Link>
 
         {/* Desktop nav */}
-        <nav className="hidden lg:flex items-center gap-1 flex-1 justify-center">
-          {categories.slice(0, 7).map((cat) => (
+        <nav className="hidden lg:flex items-center gap-0 flex-1 justify-center whitespace-nowrap">
+          {categories.slice(0, 5).map((cat) => (
             <Link
               key={cat.slug}
               to={`/categoria/${cat.slug}`}
-              className="px-3 py-2 text-sm font-medium text-ts-text hover:text-primary transition-colors rounded-lg hover:bg-secondary"
+              className="px-2.5 py-2 text-[13px] font-medium text-ts-text hover:text-primary transition-colors rounded-lg hover:bg-secondary"
             >
               {cat.name}
             </Link>
           ))}
           <div className="relative group">
-            <button className="px-3 py-2 text-sm font-medium text-ts-text hover:text-primary transition-colors rounded-lg hover:bg-secondary">
-              Mais ▾
+            <button className="px-2.5 py-2 text-[13px] font-medium text-ts-text hover:text-primary transition-colors rounded-lg hover:bg-secondary flex items-center gap-1">
+              Mais <span className="text-[10px]">▾</span>
             </button>
-            <div className="absolute top-full right-0 mt-1 bg-background rounded-lg ts-shadow border border-border py-2 min-w-[200px] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all">
-              {categories.slice(7).map((cat) => (
+            <div className="absolute top-full right-0 mt-1 bg-background rounded-lg ts-shadow border border-border py-2 min-w-[200px] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-50">
+              {categories.slice(5).map((cat) => (
                 <Link
                   key={cat.slug}
                   to={`/categoria/${cat.slug}`}
