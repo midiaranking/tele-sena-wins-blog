@@ -5,7 +5,6 @@ import CategoryBar from "@/components/blog/CategoryBar";
 import PostCard from "@/components/blog/PostCard";
 import Sidebar from "@/components/blog/Sidebar";
 import ThematicSection from "@/components/blog/ThematicSection";
-import ContentCarousel from "@/components/blog/ContentCarousel";
 import BannerCTA from "@/components/blog/BannerCTA";
 import { posts, categories, getPostsByCategory } from "@/data/posts";
 
@@ -33,21 +32,21 @@ const Index = () => {
           <div className="flex flex-col lg:flex-row gap-10">
             {/* Posts grid */}
             <div className="flex-1">
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-6">
-                {gridPosts.map((post) => (
-                  <PostCard key={post.id} post={post} />
-                ))}
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-6 px-0 mx-[12px]">
+                {gridPosts.map((post) =>
+                <PostCard key={post.id} post={post} />
+                )}
               </div>
-              {hasMore && (
-                <div className="text-center mt-8">
+              {hasMore &&
+              <div className="text-center mt-8">
                   <button
-                    onClick={() => setVisiblePosts((v) => v + POSTS_PER_PAGE)}
-                    className="px-8 py-3 border-2 border-primary text-primary font-semibold rounded-lg hover:bg-primary hover:text-primary-foreground transition-colors"
-                  >
+                  onClick={() => setVisiblePosts((v) => v + POSTS_PER_PAGE)}
+                  className="px-8 py-3 border-2 border-primary text-primary font-semibold rounded-lg hover:bg-primary hover:text-primary-foreground transition-colors">
+                  
                     Carregar mais
                   </button>
                 </div>
-              )}
+              }
             </div>
 
             {/* Sidebar */}
@@ -58,12 +57,6 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Content carousel */}
-      <ContentCarousel
-        posts={posts.filter((_, i) => i >= 3 && i < 10)}
-        title="Explore nossos conteúdos"
-      />
-
       {/* CTA banner */}
       <section className="py-10 bg-secondary">
         <div className="container mx-auto max-w-3xl">
@@ -72,16 +65,16 @@ const Index = () => {
       </section>
 
       {/* Thematic sections */}
-      {thematicCategories.map((cat, i) => (
-        <ThematicSection
-          key={cat.slug}
-          category={cat}
-          posts={getPostsByCategory(cat.slug)}
-          altBg={i % 2 === 1}
-        />
-      ))}
-    </BlogLayout>
-  );
+      {thematicCategories.map((cat, i) =>
+      <ThematicSection
+        key={cat.slug}
+        category={cat}
+        posts={getPostsByCategory(cat.slug)}
+        altBg={i % 2 === 1} />
+
+      )}
+    </BlogLayout>);
+
 };
 
 export default Index;
