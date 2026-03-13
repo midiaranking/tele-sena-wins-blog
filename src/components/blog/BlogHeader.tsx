@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { Search, Menu, X } from "lucide-react";
+import { Search, Menu, X, ChevronDown } from "lucide-react";
 import logo from "@/assets/logo-telesena.png";
 import { categories } from "@/data/posts";
 
@@ -10,55 +10,29 @@ const BlogHeader = () => {
   const [searchQuery, setSearchQuery] = useState("");
 
   return (
-    <header className="sticky top-0 z-50 bg-background ts-shadow">
-      <div className="container mx-auto flex items-center justify-between py-3">
+    <header className="sticky top-0 z-50 bg-background">
+      {/* Top row: Logo + Search + CTA */}
+      <div className="container mx-auto flex items-center justify-between py-4 gap-6">
         <Link to="/" className="shrink-0">
-          <img src={logo} alt="Tele Sena" className="h-10 md:h-12" />
+          <img src={logo} alt="Tele Sena" className="h-10 md:h-14" />
         </Link>
 
-        {/* Desktop nav */}
-        <nav className="hidden lg:flex items-center gap-0 flex-1 justify-center whitespace-nowrap">
-          {categories.slice(0, 5).map((cat) => (
-            <Link
-              key={cat.slug}
-              to={`/categoria/${cat.slug}`}
-              className="px-2.5 py-2 text-[13px] font-medium text-ts-text hover:text-primary transition-colors rounded-lg hover:bg-secondary"
-            >
-              {cat.name}
-            </Link>
-          ))}
-          <div className="relative group">
-            <button className="px-2.5 py-2 text-[13px] font-medium text-ts-text hover:text-primary transition-colors rounded-lg hover:bg-secondary flex items-center gap-1">
-              Mais <span className="text-[10px]">▾</span>
-            </button>
-            <div className="absolute top-full right-0 mt-1 bg-background rounded-lg ts-shadow border border-border py-2 min-w-[200px] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-50">
-              {categories.slice(5).map((cat) => (
-                <Link
-                  key={cat.slug}
-                  to={`/categoria/${cat.slug}`}
-                  className="block px-4 py-2 text-sm text-ts-text hover:text-primary hover:bg-secondary transition-colors"
-                >
-                  {cat.name}
-                </Link>
-              ))}
-            </div>
-          </div>
-        </nav>
-
-        {/* Right side */}
-        <div className="flex items-center gap-2">
-          {/* Search */}
-          <div className="relative hidden md:block">
+        {/* Search bar - center */}
+        <div className="hidden md:flex flex-1 max-w-xl relative">
+          <div className="flex items-center w-full bg-secondary rounded-full border border-border overflow-hidden">
+            <Search className="ml-4 w-5 h-5 text-primary shrink-0" />
             <input
               type="text"
-              placeholder="Buscar no blog..."
+              placeholder="O que você está procurando? Busque aqui!"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-48 lg:w-56 pl-9 pr-3 py-2 rounded-lg border border-border bg-secondary text-sm focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-all"
+              className="w-full px-3 py-3 bg-transparent text-sm focus:outline-none placeholder:text-muted-foreground"
             />
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
           </div>
+        </div>
 
+        {/* Right: CTA + mobile buttons */}
+        <div className="flex items-center gap-3">
           <button
             onClick={() => setSearchOpen(!searchOpen)}
             className="md:hidden p-2 text-ts-text hover:text-primary transition-colors"
@@ -70,7 +44,7 @@ const BlogHeader = () => {
             href="https://telesena.com.br"
             target="_blank"
             rel="noopener noreferrer"
-            className="hidden sm:inline-flex items-center px-5 py-2.5 bg-primary text-primary-foreground text-sm font-semibold rounded-lg hover:bg-ts-blue-light transition-colors"
+            className="hidden sm:inline-flex items-center px-6 py-3 bg-primary text-primary-foreground text-sm font-semibold rounded-full hover:bg-ts-blue-light transition-colors"
           >
             Compre sua Tele Sena
           </a>
@@ -87,18 +61,56 @@ const BlogHeader = () => {
       {/* Mobile search */}
       {searchOpen && (
         <div className="md:hidden px-4 pb-3">
-          <div className="relative">
+          <div className="flex items-center w-full bg-secondary rounded-full border border-border overflow-hidden">
+            <Search className="ml-4 w-5 h-5 text-primary shrink-0" />
             <input
               type="text"
               placeholder="Buscar no blog..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-9 pr-3 py-2 rounded-lg border border-border bg-secondary text-sm focus:outline-none focus:ring-2 focus:ring-primary/30"
+              className="w-full px-3 py-2.5 bg-transparent text-sm focus:outline-none"
             />
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
           </div>
         </div>
       )}
+
+      {/* Bottom row: Category navigation */}
+      <div className="hidden lg:block border-t border-border">
+        <nav className="container mx-auto flex items-center justify-center gap-1 py-2">
+          {categories.map((cat, i) => {
+            const isLast3 = i >= categories.length - 3;
+            if (i < 7) {
+              return (
+                <div key={cat.slug} className="relative group">
+                  <Link
+                    to={`/categoria/${cat.slug}`}
+                    className="flex items-center gap-1 px-4 py-2 text-sm font-medium text-foreground hover:text-primary transition-colors"
+                  >
+                    {cat.name}
+                  </Link>
+                </div>
+              );
+            }
+            return null;
+          })}
+          <div className="relative group">
+            <button className="flex items-center gap-1 px-4 py-2 text-sm font-medium text-foreground hover:text-primary transition-colors">
+              Mais <ChevronDown className="w-3.5 h-3.5" />
+            </button>
+            <div className="absolute top-full right-0 mt-1 bg-background rounded-xl ts-shadow border border-border py-2 min-w-[220px] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-50">
+              {categories.slice(7).map((cat) => (
+                <Link
+                  key={cat.slug}
+                  to={`/categoria/${cat.slug}`}
+                  className="block px-5 py-2.5 text-sm text-foreground hover:text-primary hover:bg-secondary transition-colors"
+                >
+                  {cat.name}
+                </Link>
+              ))}
+            </div>
+          </div>
+        </nav>
+      </div>
 
       {/* Mobile menu */}
       {mobileOpen && (
@@ -109,7 +121,7 @@ const BlogHeader = () => {
                 key={cat.slug}
                 to={`/categoria/${cat.slug}`}
                 onClick={() => setMobileOpen(false)}
-                className="px-4 py-2.5 text-sm font-medium text-ts-text hover:text-primary hover:bg-secondary rounded-lg transition-colors"
+                className="px-4 py-2.5 text-sm font-medium text-foreground hover:text-primary hover:bg-secondary rounded-lg transition-colors"
               >
                 {cat.name}
               </Link>
@@ -118,13 +130,16 @@ const BlogHeader = () => {
               href="https://telesena.com.br"
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-3 mx-4 text-center px-5 py-3 bg-primary text-primary-foreground text-sm font-semibold rounded-lg"
+              className="mt-3 mx-4 text-center px-5 py-3 bg-primary text-primary-foreground text-sm font-semibold rounded-full"
             >
               Compre sua Tele Sena
             </a>
           </nav>
         </div>
       )}
+
+      {/* Bottom shadow line */}
+      <div className="h-px bg-border shadow-sm" />
     </header>
   );
 };
