@@ -122,8 +122,7 @@ const BlogFooter = () => {
               <img src={logoGSS} alt="Grupo Silvio Santos" className="h-12 brightness-0 invert" />
             </div>
             <div className="text-center">
-              <div className="text-2xl font-bold tracking-tight">liderança</div>
-              <div className="text-[10px] opacity-80">capitalização s/a</div>
+              <img src={logoLideranca} alt="Liderança Capitalização S/A" className="h-10 brightness-0 invert" />
             </div>
           </div>
           <div className="text-xs leading-relaxed opacity-85 max-w-5xl mx-auto space-y-4">
