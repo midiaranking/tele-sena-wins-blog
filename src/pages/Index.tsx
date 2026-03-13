@@ -58,14 +58,6 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Banner publicitário */}
-      <section className="py-6 bg-secondary">
-        <div className="container mx-auto px-4">
-          <a href="https://telesena.com.br" target="_blank" rel="noopener noreferrer" className="block rounded-2xl overflow-hidden hover:opacity-95 transition-opacity">
-            <img src={bannerCarnaval} alt="Tele Sena de Carnaval 2026 – Comprar" className="w-full" />
-          </a>
-        </div>
-      </section>
 
       {/* CTA banner */}
       <section className="py-10 bg-secondary">
