@@ -2,7 +2,54 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Search, Menu, X, ChevronDown } from "lucide-react";
 import logo from "@/assets/logo-telesena.png";
-import { categories } from "@/data/posts";
+
+interface MenuGroup {
+  label: string;
+  items: { name: string; slug: string }[];
+}
+
+const menuGroups: MenuGroup[] = [
+  {
+    label: "Tele Sena",
+    items: [
+      { name: "Entender a Tele Sena", slug: "entender-a-tele-sena" },
+      { name: "Concorrer a Prêmios", slug: "concorrer-a-premios" },
+      { name: "Realizar um Sonho", slug: "realizar-um-sonho" },
+    ],
+  },
+  {
+    label: "Quite Dívidas",
+    items: [
+      { name: "Pagar as Contas", slug: "pagar-as-contas" },
+      { name: "Sair das Dívidas", slug: "sair-das-dividas" },
+    ],
+  },
+  {
+    label: "Ganhe Mais",
+    items: [
+      { name: "Ganhar Dinheiro", slug: "ganhar-dinheiro" },
+    ],
+  },
+  {
+    label: "Economize",
+    items: [
+      { name: "Organizar as Finanças", slug: "organizar-as-financas" },
+      { name: "Guardar Dinheiro", slug: "guardar-dinheiro" },
+    ],
+  },
+  {
+    label: "Invista",
+    items: [
+      { name: "Começar a Investir", slug: "comecar-a-investir" },
+    ],
+  },
+  {
+    label: "Planeje",
+    items: [
+      { name: "Planejar o Futuro", slug: "planejar-o-futuro" },
+    ],
+  },
+];
 
 const BlogHeader = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -11,13 +58,12 @@ const BlogHeader = () => {
 
   return (
     <header className="sticky top-0 z-50 bg-background">
-      {/* Top row: Logo + Search + CTA */}
+      {/* Top row */}
       <div className="container mx-auto flex items-center justify-between py-4 gap-6">
         <Link to="/" className="shrink-0">
           <img src={logo} alt="Tele Sena" className="h-10 md:h-14" />
         </Link>
 
-        {/* Search bar - center */}
         <div className="hidden md:flex flex-1 max-w-xl relative">
           <div className="flex items-center w-full bg-secondary rounded-full border border-border overflow-hidden">
             <Search className="ml-4 w-5 h-5 text-primary shrink-0" />
@@ -31,15 +77,13 @@ const BlogHeader = () => {
           </div>
         </div>
 
-        {/* Right: CTA + mobile buttons */}
         <div className="flex items-center gap-3">
           <button
             onClick={() => setSearchOpen(!searchOpen)}
-            className="md:hidden p-2 text-ts-text hover:text-primary transition-colors"
+            className="md:hidden p-2 text-foreground hover:text-primary transition-colors"
           >
             <Search className="w-5 h-5" />
           </button>
-
           <a
             href="https://telesena.com.br"
             target="_blank"
@@ -48,10 +92,9 @@ const BlogHeader = () => {
           >
             Compre sua Tele Sena
           </a>
-
           <button
             onClick={() => setMobileOpen(!mobileOpen)}
-            className="lg:hidden p-2 text-ts-text"
+            className="lg:hidden p-2 text-foreground"
           >
             {mobileOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
@@ -74,41 +117,37 @@ const BlogHeader = () => {
         </div>
       )}
 
-      {/* Bottom row: Category navigation */}
+      {/* Bottom row: grouped nav */}
       <div className="hidden lg:block border-t border-border">
         <nav className="container mx-auto flex items-center justify-center gap-1 py-2">
-          {categories.map((cat, i) => {
-            const isLast3 = i >= categories.length - 3;
-            if (i < 7) {
-              return (
-                <div key={cat.slug} className="relative group">
-                  <Link
-                    to={`/categoria/${cat.slug}`}
-                    className="flex items-center gap-1 px-4 py-2 text-sm font-medium text-foreground hover:text-primary transition-colors"
-                  >
-                    {cat.name}
-                  </Link>
+          {menuGroups.map((group) =>
+            group.items.length === 1 ? (
+              <Link
+                key={group.label}
+                to={`/categoria/${group.items[0].slug}`}
+                className="px-4 py-2 text-sm font-medium text-foreground hover:text-primary transition-colors"
+              >
+                {group.label}
+              </Link>
+            ) : (
+              <div key={group.label} className="relative group">
+                <button className="flex items-center gap-1 px-4 py-2 text-sm font-medium text-foreground hover:text-primary transition-colors">
+                  {group.label} <ChevronDown className="w-3.5 h-3.5" />
+                </button>
+                <div className="absolute top-full left-0 mt-1 bg-background rounded-xl ts-shadow border border-border py-2 min-w-[220px] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-50">
+                  {group.items.map((item) => (
+                    <Link
+                      key={item.slug}
+                      to={`/categoria/${item.slug}`}
+                      className="block px-5 py-2.5 text-sm text-foreground hover:text-primary hover:bg-secondary transition-colors"
+                    >
+                      {item.name}
+                    </Link>
+                  ))}
                 </div>
-              );
-            }
-            return null;
-          })}
-          <div className="relative group">
-            <button className="flex items-center gap-1 px-4 py-2 text-sm font-medium text-foreground hover:text-primary transition-colors">
-              Mais <ChevronDown className="w-3.5 h-3.5" />
-            </button>
-            <div className="absolute top-full right-0 mt-1 bg-background rounded-xl ts-shadow border border-border py-2 min-w-[220px] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-50">
-              {categories.slice(7).map((cat) => (
-                <Link
-                  key={cat.slug}
-                  to={`/categoria/${cat.slug}`}
-                  className="block px-5 py-2.5 text-sm text-foreground hover:text-primary hover:bg-secondary transition-colors"
-                >
-                  {cat.name}
-                </Link>
-              ))}
-            </div>
-          </div>
+              </div>
+            )
+          )}
         </nav>
       </div>
 
@@ -116,15 +155,22 @@ const BlogHeader = () => {
       {mobileOpen && (
         <div className="lg:hidden border-t border-border bg-background">
           <nav className="container mx-auto py-4 flex flex-col gap-1">
-            {categories.map((cat) => (
-              <Link
-                key={cat.slug}
-                to={`/categoria/${cat.slug}`}
-                onClick={() => setMobileOpen(false)}
-                className="px-4 py-2.5 text-sm font-medium text-foreground hover:text-primary hover:bg-secondary rounded-lg transition-colors"
-              >
-                {cat.name}
-              </Link>
+            {menuGroups.map((group) => (
+              <div key={group.label}>
+                <div className="px-4 py-2 text-xs font-semibold text-muted-foreground uppercase tracking-wider">
+                  {group.label}
+                </div>
+                {group.items.map((item) => (
+                  <Link
+                    key={item.slug}
+                    to={`/categoria/${item.slug}`}
+                    onClick={() => setMobileOpen(false)}
+                    className="block px-6 py-2.5 text-sm font-medium text-foreground hover:text-primary hover:bg-secondary rounded-lg transition-colors"
+                  >
+                    {item.name}
+                  </Link>
+                ))}
+              </div>
             ))}
             <a
               href="https://telesena.com.br"
@@ -138,7 +184,6 @@ const BlogHeader = () => {
         </div>
       )}
 
-      {/* Bottom shadow line */}
       <div className="h-px bg-border shadow-sm" />
     </header>
   );
