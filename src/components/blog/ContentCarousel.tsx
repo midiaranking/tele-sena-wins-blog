@@ -24,9 +24,7 @@ const ContentCarousel = ({ posts, title = "Destaques para você" }: ContentCarou
 
   const post = posts[current];
 
-  return (
-    <section className="py-10">
-      
+  return;
 
 
 
@@ -89,8 +87,10 @@ const ContentCarousel = ({ posts, title = "Destaques para você" }: ContentCarou
 
 
 
-      
-    </section>);
+
+
+
+
 
 };
 

@@ -33,24 +33,24 @@ const Index = () => {
           {/* Large news carousel */}
           <ContentCarousel
             posts={posts.slice(0, 7)}
-            title="Últimos Artigos"
-          />
+            title="Últimos Artigos" />
+          
 
           {/* Banner Painel do X */}
           <a
             href="https://telesena.com.br"
             target="_blank"
             rel="noopener noreferrer"
-            className="block mb-8 mt-4 rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow"
-          >
+            className="block mb-8 mt-4 rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow">
+            
             <img
               src={bannerPainelX}
               alt="Promoção Comercial Painel do X 2026 - Tele Sena de Carnaval - R$ 22.000.000,00"
-              className="w-full h-auto object-cover"
-            />
+              className="w-full h-auto object-cover" />
+            
           </a>
 
-          <h2 className="text-2xl font-bold text-foreground mb-6">Todos os Artigos</h2>
+          <h2 className="text-2xl font-bold text-foreground mb-6 my-[30px] py-[15px]">Todos os Artigos</h2>
           <div className="flex flex-col lg:flex-row gap-10">
             {/* Posts grid */}
             <div className="flex-1">
@@ -82,8 +82,8 @@ const Index = () => {
       {/* Content Carousel */}
       <ContentCarousel
         posts={posts.filter((_, i) => i >= 3 && i < 10)}
-        title="Explore nossos conteúdos"
-      />
+        title="Explore nossos conteúdos" />
+      
 
       {/* CTA banner */}
       <section className="py-10 bg-secondary">
