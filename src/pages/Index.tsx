@@ -5,6 +5,7 @@ import CategoryBar from "@/components/blog/CategoryBar";
 import PostCard from "@/components/blog/PostCard";
 import Sidebar from "@/components/blog/Sidebar";
 import ThematicSection from "@/components/blog/ThematicSection";
+import ContentCarousel from "@/components/blog/ContentCarousel";
 import BannerCTA from "@/components/blog/BannerCTA";
 import { posts, categories, getPostsByCategory } from "@/data/posts";
 
