@@ -1,4 +1,5 @@
 import { useState } from "react";
+import bannerPainelX from "@/assets/banner-painel-x.png";
 import BlogLayout from "@/components/blog/BlogLayout";
 import HeroSection from "@/components/blog/HeroSection";
 import CategoryBar from "@/components/blog/CategoryBar";
