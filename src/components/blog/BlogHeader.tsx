@@ -144,13 +144,11 @@ const BlogHeader = () => {
         <nav className="container mx-auto flex items-center justify-center gap-1 py-2">
           {menuGroups.map((group) =>
             group.items.length === 1 ? (
-              <Link
+              <MenuItemLink
                 key={group.label}
-                to={`/categoria/${group.items[0].slug}`}
+                item={group.items[0]}
                 className="px-4 py-2 text-sm font-medium text-foreground hover:text-primary transition-colors"
-              >
-                {group.label}
-              </Link>
+              />
             ) : (
               <div key={group.label} className="relative group">
                 <button className="flex items-center gap-1 px-4 py-2 text-sm font-medium text-foreground hover:text-primary transition-colors">
@@ -158,13 +156,11 @@ const BlogHeader = () => {
                 </button>
                 <div className="absolute top-full left-0 mt-1 bg-background rounded-xl ts-shadow border border-border py-2 min-w-[220px] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-50">
                   {group.items.map((item) => (
-                    <Link
-                      key={item.slug}
-                      to={`/categoria/${item.slug}`}
+                    <MenuItemLink
+                      key={item.slug || item.href}
+                      item={item}
                       className="block px-5 py-2.5 text-sm text-foreground hover:text-primary hover:bg-secondary transition-colors"
-                    >
-                      {item.name}
-                    </Link>
+                    />
                   ))}
                 </div>
               </div>
