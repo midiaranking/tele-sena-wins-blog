@@ -29,7 +29,13 @@ const Index = () => {
       {/* Main content grid */}
       <section className="py-10">
         <div className="container mx-auto">
-          <h2 className="text-2xl font-bold text-foreground mb-6">Últimos Artigos</h2>
+          {/* Large news carousel */}
+          <ContentCarousel
+            posts={posts.slice(0, 7)}
+            title="Últimos Artigos"
+          />
+
+          <h2 className="text-2xl font-bold text-foreground mb-6 mt-4">Todos os Artigos</h2>
           <div className="flex flex-col lg:flex-row gap-10">
             {/* Posts grid */}
             <div className="flex-1">
