@@ -14,7 +14,7 @@ const BlogFooter = () => {
       <div className="bg-secondary py-8">
         <div className="container mx-auto space-y-6 px-4">
           <a href="https://telesena.com.br" target="_blank" rel="noopener noreferrer" className="block rounded-2xl overflow-hidden hover:opacity-95 transition-opacity">
-            <img src={bannerCarnaval} alt="Tele Sena de Carnaval 2026 – Painel do X – R$ 22.000.000,00" className="w-full" />
+            
           </a>
           <a href="https://telesena.com.br" target="_blank" rel="noopener noreferrer" className="block rounded-2xl overflow-hidden hover:opacity-95 transition-opacity">
             <img src={bannerSemanal} alt="Tele Sena Semanal – Toda semana tem mais de R$ 1 milhão esperando por você!" className="w-full" />
@@ -52,16 +52,16 @@ const BlogFooter = () => {
             <div>
               <h3 className="font-bold text-sm uppercase tracking-wider mb-4">Categorias</h3>
               <ul className="space-y-2">
-                {categories.map((cat) => (
-                  <li key={cat.slug}>
+                {categories.map((cat) =>
+                <li key={cat.slug}>
                     <Link
-                      to={`/categoria/${cat.slug}`}
-                      className="text-sm opacity-80 hover:opacity-100 hover:underline transition-opacity"
-                    >
+                    to={`/categoria/${cat.slug}`}
+                    className="text-sm opacity-80 hover:opacity-100 hover:underline transition-opacity">
+                    
                       {cat.name}
                     </Link>
                   </li>
-                ))}
+                )}
               </ul>
             </div>
 
@@ -101,8 +101,8 @@ const BlogFooter = () => {
                 href="https://telesena.com.br"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-block mt-5 px-6 py-3 bg-accent text-accent-foreground text-sm font-bold rounded-full hover:brightness-110 transition"
-              >
+                className="inline-block mt-5 px-6 py-3 bg-accent text-accent-foreground text-sm font-bold rounded-full hover:brightness-110 transition">
+                
                 Compre sua Tele Sena
               </a>
             </div>
@@ -146,8 +146,8 @@ const BlogFooter = () => {
           </div>
         </div>
       </div>
-    </>
-  );
+    </>);
+
 };
 
 export default BlogFooter;

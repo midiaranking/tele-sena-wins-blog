@@ -10,14 +10,14 @@ const Sidebar = () => {
   return (
     <aside className="space-y-8">
       {/* Most read */}
-      <div>
+      <div className="mx-[8px]">
         <h3 className="text-xl font-bold text-foreground mb-4 pb-2 border-b-2 border-primary">
           Mais Lidos
         </h3>
         <div className="space-y-4">
-          {topPosts.map((post) => (
-            <PostCard key={post.id} post={post} variant="small" />
-          ))}
+          {topPosts.map((post) =>
+          <PostCard key={post.id} post={post} variant="small" />
+          )}
         </div>
       </div>
 
@@ -33,21 +33,21 @@ const Sidebar = () => {
           Categorias
         </h3>
         <ul className="space-y-2">
-          {categories.map((cat) => (
-            <li key={cat.slug}>
+          {categories.map((cat) =>
+          <li key={cat.slug}>
               <Link
-                to={`/categoria/${cat.slug}`}
-                className="flex items-center justify-between py-2 px-3 text-sm text-ts-text hover:text-primary hover:bg-secondary rounded-lg transition-colors"
-              >
+              to={`/categoria/${cat.slug}`}
+              className="flex items-center justify-between py-2 px-3 text-sm text-ts-text hover:text-primary hover:bg-secondary rounded-lg transition-colors">
+              
                 <span>{cat.name}</span>
                 <span className="text-xs text-muted-foreground">→</span>
               </Link>
             </li>
-          ))}
+          )}
         </ul>
       </div>
-    </aside>
-  );
+    </aside>);
+
 };
 
 export default Sidebar;
