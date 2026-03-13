@@ -1,7 +1,6 @@
 import { useState } from "react";
 import BlogLayout from "@/components/blog/BlogLayout";
 import HeroSection from "@/components/blog/HeroSection";
-import HeroSection from "@/components/blog/HeroSection";
 import CategoryBar from "@/components/blog/CategoryBar";
 import PostCard from "@/components/blog/PostCard";
 import Sidebar from "@/components/blog/Sidebar";
