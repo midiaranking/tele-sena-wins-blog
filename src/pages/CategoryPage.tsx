@@ -29,7 +29,6 @@ const CategoryPage = () => {
 
   return (
     <BlogLayout>
-      <CategoryBar />
 
       <section className="py-10">
         <div className="container mx-auto">
