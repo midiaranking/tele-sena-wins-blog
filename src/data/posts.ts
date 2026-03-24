@@ -24,6 +24,7 @@ export interface Category {
   slug: string;
   name: string;
   description: string;
+  subcategories?: string[];
 }
 
 export interface Post {
