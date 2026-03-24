@@ -40,7 +40,21 @@ const CategoryPage = () => {
           </nav>
 
           <h1 className="text-3xl font-extrabold text-foreground mb-2">{category.name}</h1>
-          <p className="text-muted-foreground mb-8 max-w-2xl">{category.description}</p>
+          <p className="text-muted-foreground mb-4 max-w-2xl">{category.description}</p>
+
+          {/* Subcategories */}
+          {category.subcategories && category.subcategories.length > 0 && (
+            <div className="flex flex-wrap gap-2 mb-8">
+              {category.subcategories.map((sub) => (
+                <span
+                  key={sub}
+                  className="px-3 py-1.5 text-xs font-medium bg-secondary text-foreground rounded-full border border-border"
+                >
+                  {sub}
+                </span>
+              ))}
+            </div>
+          )}
 
           <div className="flex flex-col lg:flex-row gap-10">
             <div className="flex-1">
