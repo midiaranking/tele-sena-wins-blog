@@ -157,6 +157,15 @@ get_header(); ?>
       <?php get_template_part( 'template-parts/newsletter' ); ?>
     </div>
   </section>
+
+  <!-- Banner Tele Sena Semanal -->
+  <section style="padding:1.5rem 0;background:var(--ts-gray);">
+    <div class="container">
+      <a href="https://telesena.com.br" target="_blank" rel="noopener noreferrer" style="display:block;border-radius:1rem;overflow:hidden;transition:opacity .2s;">
+        <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/img/banner-semanal.png' ); ?>" alt="Tele Sena Semanal – Toda semana tem mais de R$ 1 milhão esperando por você!" style="width:100%;height:auto;display:block;">
+      </a>
+    </div>
+  </section>
 </main>
 
 <?php get_footer(); ?>
