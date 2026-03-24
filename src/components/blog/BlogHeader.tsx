@@ -75,37 +75,31 @@ const MenuItemLink = ({ item, className, onClick }: { item: MenuItem; className?
 
 const BlogHeader = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [searchOpen, setSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
 
   return (
     <header className="sticky top-0 z-50 bg-background">
       {/* Top row */}
-      <div className="container mx-auto flex items-center justify-between py-4 gap-6">
+      <div className="container mx-auto flex items-center justify-between py-4 gap-4">
         <Link to="/" className="shrink-0">
           <img src={logo} alt="Tele Sena" className="h-14 md:h-16" />
         </Link>
 
-        <div className="hidden md:flex flex-1 max-w-xl relative">
+        {/* Search - visible on all sizes */}
+        <div className="flex flex-1 max-w-xl relative">
           <div className="flex items-center w-full bg-secondary rounded-full border border-border overflow-hidden">
-            <Search className="ml-4 w-5 h-5 text-primary shrink-0" />
+            <Search className="ml-3 md:ml-4 w-4 h-4 md:w-5 md:h-5 text-primary shrink-0" />
             <input
               type="text"
-              placeholder="O que você está procurando? Busque aqui!"
+              placeholder="O que você quer aprender hoje?"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full px-3 py-3 bg-transparent text-sm focus:outline-none placeholder:text-muted-foreground"
+              className="w-full px-2 md:px-3 py-2.5 md:py-3 bg-transparent text-sm focus:outline-none placeholder:text-muted-foreground"
             />
           </div>
         </div>
 
         <div className="flex items-center gap-3">
-          <button
-            onClick={() => setSearchOpen(!searchOpen)}
-            className="md:hidden p-2 text-foreground hover:text-primary transition-colors"
-          >
-            <Search className="w-5 h-5" />
-          </button>
           <a
             href="https://telesena.com.br"
             target="_blank"
@@ -122,22 +116,6 @@ const BlogHeader = () => {
           </button>
         </div>
       </div>
-
-      {/* Mobile search */}
-      {searchOpen && (
-        <div className="md:hidden px-4 pb-3">
-          <div className="flex items-center w-full bg-secondary rounded-full border border-border overflow-hidden">
-            <Search className="ml-4 w-5 h-5 text-primary shrink-0" />
-            <input
-              type="text"
-              placeholder="Buscar no blog..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full px-3 py-2.5 bg-transparent text-sm focus:outline-none"
-            />
-          </div>
-        </div>
-      )}
 
       {/* Bottom row: grouped nav */}
       <div className="hidden lg:block border-t border-border">
