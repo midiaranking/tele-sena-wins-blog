@@ -28,6 +28,34 @@ function telesena_setup() {
 }
 add_action( 'after_setup_theme', 'telesena_setup' );
 
+// ── Elementor Support ──
+function telesena_elementor_support() {
+    // Registra suporte ao Elementor
+    add_theme_support( 'elementor' );
+
+    // Permite Elementor em páginas e posts
+    if ( did_action( 'elementor/loaded' ) ) {
+        // Registra locais do tema para o Elementor Theme Builder
+        if ( function_exists( 'elementor_theme_do_location' ) ) {
+            add_action( 'elementor/theme/register_locations', function( $elementor_theme_manager ) {
+                $elementor_theme_manager->register_all_core_location();
+            } );
+        }
+    }
+}
+add_action( 'after_setup_theme', 'telesena_elementor_support' );
+
+// ── Elementor: Desabilitar cores e fontes padrão (usar as do tema) ──
+add_action( 'elementor/editor/after_enqueue_styles', function() {
+    wp_enqueue_style( 'telesena-style', get_stylesheet_uri(), array(), '1.0' );
+} );
+
+// ── Elementor: Registrar widget areas ──
+function telesena_elementor_widgets_registered() {
+    // Carrega estilos do tema no editor do Elementor
+}
+add_action( 'elementor/widgets/register', 'telesena_elementor_widgets_registered' );
+
 // ── Enqueue Styles & Scripts ──
 function telesena_scripts() {
     wp_enqueue_style( 'telesena-style', get_stylesheet_uri(), array(), '1.0' );
