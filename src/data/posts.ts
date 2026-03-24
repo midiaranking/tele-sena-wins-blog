@@ -24,6 +24,7 @@ export interface Category {
   slug: string;
   name: string;
   description: string;
+  subcategories?: string[];
 }
 
 export interface Post {
@@ -42,16 +43,36 @@ export interface Post {
 }
 
 export const categories: Category[] = [
-  { slug: "entender-a-tele-sena", name: "Entender a Tele Sena", description: "O que é, como funciona, regras, histórico, diferenças entre edições, dúvidas frequentes" },
-  { slug: "pagar-as-contas", name: "Pagar as Contas", description: "Organizar boletos, priorizar contas, evitar juros, contas essenciais vs extras" },
-  { slug: "sair-das-dividas", name: "Sair das Dívidas", description: "Quitação, negociação, Feirão Serasa, PROCON, Desenrola Brasil" },
-  { slug: "ganhar-dinheiro", name: "Ganhar Dinheiro", description: "Renda extra, bicos, freelas, negócios com baixo investimento" },
-  { slug: "concorrer-a-premios", name: "Concorrer a Prêmios", description: "Sorteios ativos, como participar, calendário de premiações, resultados" },
-  { slug: "realizar-um-sonho", name: "Realizar um Sonho", description: "Histórias de ganhadores, metas pessoais, planejamento para conquistas" },
-  { slug: "organizar-as-financas", name: "Organizar as Finanças", description: "Orçamento doméstico, planilhas, apps, método dos envelopes, 50-30-20" },
-  { slug: "guardar-dinheiro", name: "Guardar Dinheiro", description: "Poupança, desafios de economia, reserva de emergência, dicas de corte de gastos" },
-  { slug: "comecar-a-investir", name: "Começar a Investir", description: "Poupança, CDB, Tesouro Direto, renda fixa acessível para iniciantes" },
-  { slug: "planejar-o-futuro", name: "Planejar o Futuro", description: "Aposentadoria, previdência, educação dos filhos, objetivos de longo prazo" },
+  {
+    slug: "entender-a-tele-sena",
+    name: "Entender a Tele Sena",
+    description: "A Tele Sena é um dos títulos de capitalização mais conhecidos do Brasil. Aqui você aprende como funciona, como participar, quais são as premiações e conhece histórias dos nossos ganhadores.",
+    subcategories: ["O que é?", "Como funciona?", "Histórias de ganhadores"],
+  },
+  {
+    slug: "organizar-as-financas",
+    name: "Organizar as finanças",
+    description: "Organizar seu dinheiro é o primeiro passo para ter mais tranquilidade financeira. Confira dicas práticas para controlar gastos, economizar no dia a dia, entender melhor suas finanças e tomar decisões mais inteligentes.",
+    subcategories: ["Pagamentos e contas", "Educação financeira", "Dicas para economizar", "Consumo consciente"],
+  },
+  {
+    slug: "sair-das-dividas",
+    name: "Sair das dívidas",
+    description: "Se as dívidas estão tirando seu sono, aprenda mais sobre elas e saiba como renegociar para limpar seu nome. Encontre caminhos para recuperar sua vida financeira com mais segurança.",
+    subcategories: ["Tipos de dívidas", "Dicas para renegociar", "Empréstimos e financiamentos", "Nome sujo e negativação"],
+  },
+  {
+    slug: "ganhar-dinheiro",
+    name: "Ganhar dinheiro",
+    description: "Quer aumentar sua renda? Encontre aqui ideias de renda extra, oportunidades de trabalho, pequenos negócios e diversas formas de ganhar dinheiro. São dicas práticas para quem quer melhorar de vida.",
+    subcategories: ["Renda extra", "Pequenos negócios", "Internet e redes sociais", "Título de capitalização", "Apps e plataformas"],
+  },
+  {
+    slug: "planejar-o-futuro",
+    name: "Planejar o futuro",
+    description: "Planejar o futuro financeiro ajuda a transformar sonhos em realidade. Aprenda a guardar dinheiro, começar a investir, se preparar para grandes objetivos e construir seu futuro com mais segurança.",
+    subcategories: ["Como guardar dinheiro", "Pequenos investimentos", "Realização de sonhos", "Aposentadoria"],
+  },
 ];
 
 export const posts: Post[] = [
@@ -699,8 +720,21 @@ export const posts: Post[] = [
   },
 ];
 
+// Map old category slugs to new parent categories
+const categorySlugMap: Record<string, string> = {
+  "pagar-as-contas": "organizar-as-financas",
+  "concorrer-a-premios": "entender-a-tele-sena",
+  "realizar-um-sonho": "entender-a-tele-sena",
+  "guardar-dinheiro": "planejar-o-futuro",
+  "comecar-a-investir": "planejar-o-futuro",
+};
+
+export function resolveCategory(slug: string): string {
+  return categorySlugMap[slug] || slug;
+}
+
 export function getPostsByCategory(categorySlug: string): Post[] {
-  return posts.filter((p) => p.categorySlug === categorySlug);
+  return posts.filter((p) => resolveCategory(p.categorySlug) === categorySlug);
 }
 
 export function getPostBySlug(slug: string): Post | undefined {
@@ -712,5 +746,6 @@ export function getFeaturedPosts(): Post[] {
 }
 
 export function getRelatedPosts(post: Post, limit = 3): Post[] {
-  return posts.filter((p) => p.categorySlug === post.categorySlug && p.id !== post.id).slice(0, limit);
+  const resolvedCat = resolveCategory(post.categorySlug);
+  return posts.filter((p) => resolveCategory(p.categorySlug) === resolvedCat && p.id !== post.id).slice(0, limit);
 }

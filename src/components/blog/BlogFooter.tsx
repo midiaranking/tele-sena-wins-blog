@@ -2,39 +2,24 @@ import { Link } from "react-router-dom";
 import { Instagram, Youtube, Facebook } from "lucide-react";
 import logo from "@/assets/logo-telesena.png";
 import logoGSS from "@/assets/logo-gss.png";
-import bannerCarnaval from "@/assets/banner-carnaval.png";
-import bannerSemanal from "@/assets/banner-semanal.png";
 import logoLideranca from "@/assets/logo-lideranca.png";
-import { categories } from "@/data/posts";
 
 const BlogFooter = () => {
   return (
     <>
-      {/* Banners publicitários */}
-      <div className="bg-secondary py-8">
-        <div className="container mx-auto space-y-6 px-4">
-          <a href="https://telesena.com.br" target="_blank" rel="noopener noreferrer" className="block rounded-2xl overflow-hidden hover:opacity-95 transition-opacity">
-            
-          </a>
-          <a href="https://telesena.com.br" target="_blank" rel="noopener noreferrer" className="block rounded-2xl overflow-hidden hover:opacity-95 transition-opacity">
-            <img src={bannerSemanal} alt="Tele Sena Semanal – Toda semana tem mais de R$ 1 milhão esperando por você!" className="w-full" />
-          </a>
-        </div>
-      </div>
-
       <footer className="bg-primary text-primary-foreground">
         <div className="container mx-auto py-12 px-4">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
-          {/* Logo centered */}
-          <div className="col-span-1 md:col-span-2 lg:col-span-5 flex justify-center mb-6">
-            <img src={logo} alt="Tele Sena" className="h-14" />
-          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {/* Logo centered */}
+            <div className="col-span-1 md:col-span-2 lg:col-span-4 flex justify-center mb-6">
+              <img src={logo} alt="Tele Sena" className="h-14" />
+            </div>
 
-          {/* About */}
-          <div>
-            <p className="text-sm opacity-80 leading-relaxed">
-              Blog da Tele Sena — dicas de educação financeira, renda extra e tudo sobre a Tele Sena para você realizar seus sonhos.
-            </p>
+            {/* About + Social + CTA */}
+            <div>
+              <p className="text-sm opacity-80 leading-relaxed">
+                Blog da Tele Sena - Dicas e ideias para melhorar sua vida financeira, planejar o futuro e realizar seus sonhos.
+              </p>
               <div className="flex gap-3 mt-5">
                 <a href="#" className="w-10 h-10 rounded-lg bg-primary-foreground/10 hover:bg-primary-foreground/20 flex items-center justify-center transition-colors" aria-label="Instagram">
                   <Instagram className="w-5 h-5" />
@@ -46,23 +31,14 @@ const BlogFooter = () => {
                   <Facebook className="w-5 h-5" />
                 </a>
               </div>
-            </div>
-
-            {/* Categorias */}
-            <div>
-              <h3 className="font-bold text-sm uppercase tracking-wider mb-4">Categorias</h3>
-              <ul className="space-y-2">
-                {categories.map((cat) =>
-                <li key={cat.slug}>
-                    <Link
-                    to={`/categoria/${cat.slug}`}
-                    className="text-sm opacity-80 hover:opacity-100 hover:underline transition-opacity">
-                    
-                      {cat.name}
-                    </Link>
-                  </li>
-                )}
-              </ul>
+              <a
+                href="https://telesena.com.br"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-block mt-5 px-6 py-3 bg-accent text-accent-foreground text-sm font-bold rounded-full hover:brightness-110 transition"
+              >
+                Compre sua Tele Sena
+              </a>
             </div>
 
             {/* Termos do site */}
@@ -83,10 +59,11 @@ const BlogFooter = () => {
               <ul className="space-y-2">
                 <li><a href="#" className="text-sm opacity-80 hover:opacity-100 hover:underline transition-opacity">As Tele Senas</a></li>
                 <li><a href="#" className="text-sm opacity-80 hover:opacity-100 hover:underline transition-opacity">Assessoria de Imprensa</a></li>
+                <li><Link to="/equipe" className="text-sm opacity-80 hover:opacity-100 hover:underline transition-opacity">Equipe Tele Sena</Link></li>
               </ul>
               <h3 className="font-bold text-sm uppercase tracking-wider mt-6 mb-4">Precisa de Ajuda?</h3>
               <ul className="space-y-2">
-                <li><a href="#" className="text-sm opacity-80 hover:opacity-100 hover:underline transition-opacity">Acesse a Central de Atendimento</a></li>
+                <li><a href="https://atendimento.telesena.com.br/#/" target="_blank" rel="noopener noreferrer" className="text-sm opacity-80 hover:opacity-100 hover:underline transition-opacity">Acesse a Central de Atendimento</a></li>
               </ul>
             </div>
 
@@ -97,14 +74,6 @@ const BlogFooter = () => {
                 <li>SAC: 0800-7010319</li>
                 <li>Ouvidoria: 0800-7715936</li>
               </ul>
-              <a
-                href="https://telesena.com.br"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-block mt-5 px-6 py-3 bg-accent text-accent-foreground text-sm font-bold rounded-full hover:brightness-110 transition">
-                
-                Compre sua Tele Sena
-              </a>
             </div>
           </div>
 
@@ -146,8 +115,8 @@ const BlogFooter = () => {
           </div>
         </div>
       </div>
-    </>);
-
+    </>
+  );
 };
 
 export default BlogFooter;

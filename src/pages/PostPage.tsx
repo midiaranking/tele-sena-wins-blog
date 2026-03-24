@@ -3,7 +3,7 @@ import { Clock, User, ArrowLeft, Share2 } from "lucide-react";
 import BlogLayout from "@/components/blog/BlogLayout";
 import PostCard from "@/components/blog/PostCard";
 import BannerCTA from "@/components/blog/BannerCTA";
-import { getPostBySlug, getRelatedPosts } from "@/data/posts";
+import { getPostBySlug, getRelatedPosts, resolveCategory, categories } from "@/data/posts";
 
 const PostPage = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -23,6 +23,8 @@ const PostPage = () => {
   }
 
   const related = getRelatedPosts(post);
+  const resolvedSlug = resolveCategory(post.categorySlug);
+  const resolvedCategory = categories.find(c => c.slug === resolvedSlug);
 
   const handleShare = (platform: string) => {
     const url = window.location.href;
@@ -47,8 +49,8 @@ const PostPage = () => {
           <nav className="text-sm text-muted-foreground mb-6">
             <Link to="/" className="hover:text-primary">Home</Link>
             <span className="mx-2">›</span>
-            <Link to={`/categoria/${post.categorySlug}`} className="hover:text-primary">
-              {post.category}
+            <Link to={`/categoria/${resolvedSlug}`} className="hover:text-primary">
+              {resolvedCategory?.name || post.category}
             </Link>
             <span className="mx-2">›</span>
             <span className="text-foreground font-medium line-clamp-1">{post.title}</span>
@@ -56,7 +58,7 @@ const PostPage = () => {
 
           {/* Header */}
           <span className="inline-block px-3 py-1 text-xs font-semibold bg-accent text-accent-foreground rounded-full mb-4">
-            {post.category}
+            {resolvedCategory?.name || post.category}
           </span>
           <h1 className="text-3xl md:text-4xl font-extrabold text-foreground leading-tight mb-4">
             {post.title}
@@ -86,6 +88,21 @@ const PostPage = () => {
             dangerouslySetInnerHTML={{ __html: post.content }}
           />
 
+          {/* Author section */}
+          <div className="bg-secondary rounded-lg p-6 mb-10 flex items-start gap-4">
+            <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center shrink-0">
+              <User className="w-6 h-6 text-primary-foreground" />
+            </div>
+            <div>
+              <Link to="/equipe" className="text-lg font-bold text-foreground hover:text-primary transition-colors">
+                Por Equipe Tele Sena
+              </Link>
+              <p className="text-sm text-muted-foreground mt-1">
+                Conteúdo revisado e atualizado para te ajudar a cuidar melhor do seu dinheiro.
+              </p>
+            </div>
+          </div>
+
           {/* Inline CTA */}
           <div className="rounded-lg p-6 mb-10" style={{ background: "var(--ts-gradient-blue)" }}>
             <h3 className="text-xl font-bold text-primary-foreground mb-2">
@@ -105,7 +122,7 @@ const PostPage = () => {
           </div>
 
           {/* Share */}
-          <div className="flex items-center gap-4 mb-10 pb-8 border-b border-border">
+          <div className="flex flex-wrap items-center gap-4 mb-10 pb-8 border-b border-border">
             <span className="flex items-center gap-2 text-sm font-semibold text-foreground">
               <Share2 className="w-4 h-4" /> Compartilhar:
             </span>
