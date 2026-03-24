@@ -720,8 +720,21 @@ export const posts: Post[] = [
   },
 ];
 
+// Map old category slugs to new parent categories
+const categorySlugMap: Record<string, string> = {
+  "pagar-as-contas": "organizar-as-financas",
+  "concorrer-a-premios": "entender-a-tele-sena",
+  "realizar-um-sonho": "entender-a-tele-sena",
+  "guardar-dinheiro": "planejar-o-futuro",
+  "comecar-a-investir": "planejar-o-futuro",
+};
+
+export function resolveCategory(slug: string): string {
+  return categorySlugMap[slug] || slug;
+}
+
 export function getPostsByCategory(categorySlug: string): Post[] {
-  return posts.filter((p) => p.categorySlug === categorySlug);
+  return posts.filter((p) => resolveCategory(p.categorySlug) === categorySlug);
 }
 
 export function getPostBySlug(slug: string): Post | undefined {
@@ -733,5 +746,6 @@ export function getFeaturedPosts(): Post[] {
 }
 
 export function getRelatedPosts(post: Post, limit = 3): Post[] {
-  return posts.filter((p) => p.categorySlug === post.categorySlug && p.id !== post.id).slice(0, limit);
+  const resolvedCat = resolveCategory(post.categorySlug);
+  return posts.filter((p) => resolveCategory(p.categorySlug) === resolvedCat && p.id !== post.id).slice(0, limit);
 }

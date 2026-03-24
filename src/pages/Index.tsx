@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import bannerPainelX from "@/assets/banner-painel-x.png";
 import BlogLayout from "@/components/blog/BlogLayout";
 import HeroSection from "@/components/blog/HeroSection";
@@ -8,7 +9,9 @@ import Sidebar from "@/components/blog/Sidebar";
 import ThematicSection from "@/components/blog/ThematicSection";
 import BannerCTA from "@/components/blog/BannerCTA";
 import ContentCarousel from "@/components/blog/ContentCarousel";
+import NewsletterWidget from "@/components/blog/NewsletterWidget";
 import { posts, categories, getPostsByCategory } from "@/data/posts";
+import bannerSemanal from "@/assets/banner-semanal.png";
 
 const POSTS_PER_PAGE = 6;
 
@@ -30,11 +33,15 @@ const Index = () => {
       {/* Main content grid */}
       <section className="py-10">
         <div className="container mx-auto">
+          {/* H1 SEO */}
+          <h1 className="text-3xl md:text-4xl font-extrabold text-foreground mb-8 leading-tight">
+            Dicas para organizar as finanças, ganhar dinheiro e realizar seus sonhos
+          </h1>
+
           {/* Large news carousel */}
           <ContentCarousel
             posts={posts.slice(0, 7)}
             title="Últimos Artigos" />
-          
 
           {/* Banner Painel do X */}
           <a
@@ -42,29 +49,36 @@ const Index = () => {
             target="_blank"
             rel="noopener noreferrer"
             className="block mb-8 mt-4 rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow">
-            
             <img
               src={bannerPainelX}
               alt="Promoção Comercial Painel do X 2026 - Tele Sena de Carnaval - R$ 22.000.000,00"
               className="w-full h-auto object-cover" />
-            
           </a>
 
-          <h2 className="text-2xl font-bold text-foreground mb-6 my-[30px] py-[15px]">Todos os Artigos</h2>
+          {/* Mais Recentes */}
+          <div className="flex items-center justify-between mb-6 my-[30px] py-[15px]">
+            <h2 className="text-2xl font-bold text-foreground">Mais Recentes</h2>
+            <Link
+              to="/categoria/organizar-as-financas"
+              className="text-sm font-semibold text-primary hover:underline"
+            >
+              Ver todos os artigos →
+            </Link>
+          </div>
+
           <div className="flex flex-col lg:flex-row gap-10">
             {/* Posts grid */}
             <div className="flex-1">
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-6 px-0 mx-[12px]">
                 {gridPosts.map((post) =>
-                <PostCard key={post.id} post={post} />
+                  <PostCard key={post.id} post={post} />
                 )}
               </div>
               {hasMore &&
-              <div className="text-center mt-8">
+                <div className="text-center mt-8">
                   <button
-                  onClick={() => setVisiblePosts((v) => v + POSTS_PER_PAGE)}
-                  className="px-8 py-3 border-2 border-primary text-primary font-semibold rounded-lg hover:bg-primary hover:text-primary-foreground transition-colors">
-                  
+                    onClick={() => setVisiblePosts((v) => v + POSTS_PER_PAGE)}
+                    className="px-8 py-3 border-2 border-primary text-primary font-semibold rounded-lg hover:bg-primary hover:text-primary-foreground transition-colors">
                     Carregar mais
                   </button>
                 </div>
@@ -83,7 +97,6 @@ const Index = () => {
       <ContentCarousel
         posts={posts.filter((_, i) => i >= 3 && i < 10)}
         title="Explore nossos conteúdos" />
-      
 
       {/* CTA banner */}
       <section className="py-10 bg-secondary">
@@ -94,15 +107,30 @@ const Index = () => {
 
       {/* Thematic sections */}
       {thematicCategories.map((cat, i) =>
-      <ThematicSection
-        key={cat.slug}
-        category={cat}
-        posts={getPostsByCategory(cat.slug)}
-        altBg={i % 2 === 1} />
-
+        <ThematicSection
+          key={cat.slug}
+          category={cat}
+          posts={getPostsByCategory(cat.slug)}
+          altBg={i % 2 === 1} />
       )}
-    </BlogLayout>);
 
+      {/* Newsletter before footer */}
+      <section className="py-10 bg-secondary">
+        <div className="container mx-auto max-w-xl">
+          <NewsletterWidget />
+        </div>
+      </section>
+
+      {/* Banner Tele Sena Semanal before footer */}
+      <section className="py-6 bg-secondary">
+        <div className="container mx-auto">
+          <a href="https://telesena.com.br" target="_blank" rel="noopener noreferrer" className="block rounded-2xl overflow-hidden hover:opacity-95 transition-opacity">
+            <img src={bannerSemanal} alt="Tele Sena Semanal – Toda semana tem mais de R$ 1 milhão esperando por você!" className="w-full" />
+          </a>
+        </div>
+      </section>
+    </BlogLayout>
+  );
 };
 
 export default Index;
