@@ -28,8 +28,23 @@ const SubcategoryPage = () => {
     );
   }
 
+  const breadcrumbJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://tele-sena-wins-blog.lovable.app/" },
+      { "@type": "ListItem", "position": 2, "name": category.name, "item": `https://tele-sena-wins-blog.lovable.app/categoria/${category.slug}` },
+      { "@type": "ListItem", "position": 3, "name": subcategory.name, "item": `https://tele-sena-wins-blog.lovable.app/categoria/${category.slug}/${subcategory.slug}` },
+    ],
+  };
+
   return (
     <BlogLayout>
+      <Helmet>
+        <title>{subcategory.name} — {category.name} | Blog da Tele Sena</title>
+        <meta name="description" content={subcategory.description} />
+        <script type="application/ld+json">{JSON.stringify(breadcrumbJsonLd)}</script>
+      </Helmet>
       <section className="py-10">
         <div className="container mx-auto">
           {/* Breadcrumb */}
