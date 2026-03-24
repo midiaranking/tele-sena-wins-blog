@@ -174,5 +174,13 @@ function telesena_read_time( $post_id = null ) {
     return $minutes . ' min';
 }
 
+// ── Customizer (Personalizar) ──
+require_once get_template_directory() . '/inc/customizer.php';
+
+// ── Elementor Widgets ──
+if ( did_action( 'elementor/loaded' ) || defined( 'ELEMENTOR_VERSION' ) ) {
+    require_once get_template_directory() . '/inc/elementor-widgets.php';
+}
+
 // ── Demo Content Importer ──
 require_once get_template_directory() . '/inc/demo-content.php';
