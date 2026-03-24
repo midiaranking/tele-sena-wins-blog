@@ -173,3 +173,6 @@ function telesena_read_time( $post_id = null ) {
     $minutes = max( 1, ceil( $words / 200 ) );
     return $minutes . ' min';
 }
+
+// ── Demo Content Importer ──
+require_once get_template_directory() . '/inc/demo-content.php';
