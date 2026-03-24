@@ -20,11 +20,17 @@ import calendarioSorteiosImg from "@/assets/post-calendario-sorteios.jpg";
 import sonhoCasaImg from "@/assets/post-sonho-casa-propria.jpg";
 import aposentadoriaImg from "@/assets/post-aposentadoria.jpg";
 
+export interface Subcategory {
+  name: string;
+  slug: string;
+  description: string;
+}
+
 export interface Category {
   slug: string;
   name: string;
   description: string;
-  subcategories?: string[];
+  subcategories: Subcategory[];
 }
 
 export interface Post {
@@ -36,6 +42,7 @@ export interface Post {
   image: string;
   category: string;
   categorySlug: string;
+  subcategorySlug?: string;
   date: string;
   readTime: string;
   author: string;
@@ -47,31 +54,56 @@ export const categories: Category[] = [
     slug: "entender-a-tele-sena",
     name: "Entender a Tele Sena",
     description: "A Tele Sena é um dos títulos de capitalização mais conhecidos do Brasil. Aqui você aprende como funciona, como participar, quais são as premiações e conhece histórias dos nossos ganhadores.",
-    subcategories: ["O que é?", "Como funciona?", "Histórias de ganhadores"],
+    subcategories: [
+      { name: "O que é?", slug: "o-que-e", description: "Saiba o que é a Tele Sena, como ela funciona e por que é diferente de uma loteria convencional." },
+      { name: "Como funciona?", slug: "como-funciona", description: "Entenda o funcionamento da Tele Sena: sorteios, prêmios, edições e como participar." },
+      { name: "Histórias de ganhadores", slug: "historias-de-ganhadores", description: "Conheça histórias reais de pessoas que ganharam prêmios da Tele Sena e mudaram de vida." },
+    ],
   },
   {
     slug: "organizar-as-financas",
     name: "Organizar as finanças",
     description: "Organizar seu dinheiro é o primeiro passo para ter mais tranquilidade financeira. Confira dicas práticas para controlar gastos, economizar no dia a dia, entender melhor suas finanças e tomar decisões mais inteligentes.",
-    subcategories: ["Pagamentos e contas", "Educação financeira", "Dicas para economizar", "Consumo consciente"],
+    subcategories: [
+      { name: "Pagamentos e contas", slug: "pagamentos-e-contas", description: "Dicas para organizar seus pagamentos, evitar atrasos e manter as contas em dia." },
+      { name: "Educação financeira", slug: "educacao-financeira", description: "Aprenda conceitos essenciais de educação financeira para tomar decisões mais inteligentes." },
+      { name: "Dicas para economizar", slug: "dicas-para-economizar", description: "Estratégias práticas para economizar dinheiro no dia a dia sem abrir mão da qualidade de vida." },
+      { name: "Consumo consciente", slug: "consumo-consciente", description: "Saiba como consumir de forma inteligente, evitando desperdícios e gastos desnecessários." },
+    ],
   },
   {
     slug: "sair-das-dividas",
     name: "Sair das dívidas",
     description: "Se as dívidas estão tirando seu sono, aprenda mais sobre elas e saiba como renegociar para limpar seu nome. Encontre caminhos para recuperar sua vida financeira com mais segurança.",
-    subcategories: ["Tipos de dívidas", "Dicas para renegociar", "Empréstimos e financiamentos", "Nome sujo e negativação"],
+    subcategories: [
+      { name: "Tipos de dívidas", slug: "tipos-de-dividas", description: "Conheça os diferentes tipos de dívidas e entenda quais são as mais urgentes para quitar." },
+      { name: "Dicas para renegociar", slug: "dicas-para-renegociar", description: "Aprenda técnicas e estratégias para renegociar suas dívidas com desconto." },
+      { name: "Empréstimos e financiamentos", slug: "emprestimos-e-financiamentos", description: "Entenda como funcionam empréstimos e financiamentos e quando vale a pena contratar." },
+      { name: "Nome sujo e negativação", slug: "nome-sujo-e-negativacao", description: "Saiba o que fazer quando seu nome está negativado e como limpar seu CPF." },
+    ],
   },
   {
     slug: "ganhar-dinheiro",
     name: "Ganhar dinheiro",
     description: "Quer aumentar sua renda? Encontre aqui ideias de renda extra, oportunidades de trabalho, pequenos negócios e diversas formas de ganhar dinheiro. São dicas práticas para quem quer melhorar de vida.",
-    subcategories: ["Renda extra", "Pequenos negócios", "Internet e redes sociais", "Título de capitalização", "Apps e plataformas"],
+    subcategories: [
+      { name: "Renda extra", slug: "renda-extra", description: "Ideias práticas para ganhar dinheiro extra além do seu trabalho principal." },
+      { name: "Pequenos negócios", slug: "pequenos-negocios", description: "Dicas para montar e gerenciar um pequeno negócio com pouco investimento." },
+      { name: "Internet e redes sociais", slug: "internet-e-redes-sociais", description: "Aprenda a ganhar dinheiro usando a internet e as redes sociais." },
+      { name: "Título de capitalização", slug: "titulo-de-capitalizacao", description: "Entenda como títulos de capitalização podem ser uma forma de guardar dinheiro e concorrer a prêmios." },
+      { name: "Apps e plataformas", slug: "apps-e-plataformas", description: "Conheça aplicativos e plataformas que pagam por tarefas, pesquisas e cashback." },
+    ],
   },
   {
     slug: "planejar-o-futuro",
     name: "Planejar o futuro",
     description: "Planejar o futuro financeiro ajuda a transformar sonhos em realidade. Aprenda a guardar dinheiro, começar a investir, se preparar para grandes objetivos e construir seu futuro com mais segurança.",
-    subcategories: ["Como guardar dinheiro", "Pequenos investimentos", "Realização de sonhos", "Aposentadoria"],
+    subcategories: [
+      { name: "Como guardar dinheiro", slug: "como-guardar-dinheiro", description: "Métodos e desafios para começar a guardar dinheiro, mesmo com pouca renda." },
+      { name: "Pequenos investimentos", slug: "pequenos-investimentos", description: "Opções de investimento acessíveis para quem está começando com pouco dinheiro." },
+      { name: "Realização de sonhos", slug: "realizacao-de-sonhos", description: "Histórias inspiradoras e dicas para transformar seus sonhos em realidade." },
+      { name: "Aposentadoria", slug: "aposentadoria", description: "Planeje sua aposentadoria com estratégias práticas para garantir um futuro tranquilo." },
+    ],
   },
 ];
 
@@ -115,6 +147,7 @@ export const posts: Post[] = [
     image: teleSenaGuiaImg,
     category: "Entender a Tele Sena",
     categorySlug: "entender-a-tele-sena",
+    subcategorySlug: "o-que-e",
     date: "13 Mar 2026",
     readTime: "8 min",
     author: "Equipe Tele Sena",
@@ -165,6 +198,7 @@ export const posts: Post[] = [
     image: limparNomeImg,
     category: "Sair das Dívidas",
     categorySlug: "sair-das-dividas",
+    subcategorySlug: "nome-sujo-e-negativacao",
     date: "12 Mar 2026",
     readTime: "9 min",
     author: "Equipe Tele Sena",
@@ -212,6 +246,7 @@ export const posts: Post[] = [
     image: rendaExtraCasaImg,
     category: "Ganhar Dinheiro",
     categorySlug: "ganhar-dinheiro",
+    subcategorySlug: "renda-extra",
     date: "11 Mar 2026",
     readTime: "7 min",
     author: "Equipe Tele Sena",
@@ -255,6 +290,7 @@ export const posts: Post[] = [
     image: metodoEnvelopesImg,
     category: "Organizar as Finanças",
     categorySlug: "organizar-as-financas",
+    subcategorySlug: "educacao-financeira",
     date: "10 Mar 2026",
     readTime: "6 min",
     author: "Equipe Tele Sena",
@@ -288,8 +324,9 @@ export const posts: Post[] = [
 
 <div class="highlight-tip"><strong>💡 Dica para não desistir:</strong> Cole a tabela do desafio na geladeira ou no espelho do banheiro. Cada semana que você completar, risque com marca-texto. Ver o progresso visual dá uma sensação boa e te motiva a continuar.</div>`,
     image: desafio52Img,
-    category: "Guardar Dinheiro",
-    categorySlug: "guardar-dinheiro",
+    category: "Planejar o Futuro",
+    categorySlug: "planejar-o-futuro",
+    subcategorySlug: "como-guardar-dinheiro",
     date: "9 Mar 2026",
     readTime: "5 min",
     author: "Equipe Tele Sena",
@@ -325,8 +362,9 @@ export const posts: Post[] = [
 
 <div class="highlight-tip"><strong>💡 Dica final:</strong> Não espere ter "uma boa quantia" para começar. O segredo dos investimentos é a consistência. R$ 30 por mês, todo mês, sem parar. É assim que o seu dinheiro começa a trabalhar por você.</div>`,
     image: tesouroDiretoImg,
-    category: "Começar a Investir",
-    categorySlug: "comecar-a-investir",
+    category: "Planejar o Futuro",
+    categorySlug: "planejar-o-futuro",
+    subcategorySlug: "pequenos-investimentos",
     date: "8 Mar 2026",
     readTime: "7 min",
     author: "Equipe Tele Sena",
@@ -359,13 +397,14 @@ export const posts: Post[] = [
 <h2>Regra de ouro</h2>
 <p>Primeiro você garante o básico para sobreviver e manter a renda. Depois organiza o resto. E se precisar de ajuda, procure o PROCON da sua cidade ou o Serasa Limpa Nome — existem caminhos para sair dessa.</p>`,
     image: contasPriorizarImg,
-    category: "Pagar as Contas",
-    categorySlug: "pagar-as-contas",
+    category: "Organizar as Finanças",
+    categorySlug: "organizar-as-financas",
+    subcategorySlug: "pagamentos-e-contas",
     date: "7 Mar 2026",
     readTime: "5 min",
     author: "Equipe Tele Sena",
   },
-  // ===== ARTIGO 08 — Concorrer a Prêmios =====
+  // ===== ARTIGO 08 — Entender a Tele Sena =====
   {
     id: "8",
     slug: "calendario-sorteios-tele-sena-2026",
@@ -399,13 +438,14 @@ export const posts: Post[] = [
 
 <div class="highlight-tip"><strong>💡 Dica importante:</strong> Não perca nenhum sorteio. Muitos prêmios deixam de ser resgatados porque as pessoas esquecem de conferir. Crie um lembrete no celular para todo domingo.</div>`,
     image: calendarioSorteiosImg,
-    category: "Concorrer a Prêmios",
-    categorySlug: "concorrer-a-premios",
+    category: "Entender a Tele Sena",
+    categorySlug: "entender-a-tele-sena",
+    subcategorySlug: "como-funciona",
     date: "6 Mar 2026",
     readTime: "5 min",
     author: "Equipe Tele Sena",
   },
-  // ===== ARTIGO 09 — Realizar um Sonho =====
+  // ===== ARTIGO 09 — Entender a Tele Sena (Histórias) =====
   {
     id: "9",
     slug: "historia-ganhadora-tele-sena-casa-propria",
@@ -426,8 +466,9 @@ export const posts: Post[] = [
 
 <div class="highlight-info"><strong>ℹ️ Seu sonho também vale:</strong> A história da Marta é especial, mas não é única. A Tele Sena já premiou milhares de pessoas em todo o Brasil. E enquanto você concorre, pode ir planejando o que faria com o prêmio. Esse exercício de imaginar o futuro é o primeiro passo para construí-lo.</div>`,
     image: sonhoCasaImg,
-    category: "Realizar um Sonho",
-    categorySlug: "realizar-um-sonho",
+    category: "Entender a Tele Sena",
+    categorySlug: "entender-a-tele-sena",
+    subcategorySlug: "historias-de-ganhadores",
     date: "5 Mar 2026",
     readTime: "6 min",
     author: "Equipe Tele Sena",
@@ -460,6 +501,7 @@ export const posts: Post[] = [
     image: aposentadoriaImg,
     category: "Planejar o Futuro",
     categorySlug: "planejar-o-futuro",
+    subcategorySlug: "aposentadoria",
     date: "4 Mar 2026",
     readTime: "7 min",
     author: "Equipe Tele Sena",
@@ -474,6 +516,7 @@ export const posts: Post[] = [
     image: financasImg,
     category: "Organizar as Finanças",
     categorySlug: "organizar-as-financas",
+    subcategorySlug: "educacao-financeira",
     date: "25 Fev 2026",
     readTime: "6 min",
     author: "Equipe Tele Sena",
@@ -495,6 +538,7 @@ export const posts: Post[] = [
     image: rendaExtraImg,
     category: "Ganhar Dinheiro",
     categorySlug: "ganhar-dinheiro",
+    subcategorySlug: "internet-e-redes-sociais",
     date: "24 Fev 2026",
     readTime: "7 min",
     author: "Equipe Tele Sena",
@@ -515,6 +559,7 @@ export const posts: Post[] = [
     image: financasImg,
     category: "Ganhar Dinheiro",
     categorySlug: "ganhar-dinheiro",
+    subcategorySlug: "apps-e-plataformas",
     date: "20 Fev 2026",
     readTime: "5 min",
     author: "Equipe Tele Sena",
@@ -533,6 +578,7 @@ export const posts: Post[] = [
     image: guardarImg,
     category: "Ganhar Dinheiro",
     categorySlug: "ganhar-dinheiro",
+    subcategorySlug: "renda-extra",
     date: "18 Fev 2026",
     readTime: "6 min",
     author: "Equipe Tele Sena",
@@ -554,6 +600,7 @@ export const posts: Post[] = [
     image: dividasImg,
     category: "Sair das Dívidas",
     categorySlug: "sair-das-dividas",
+    subcategorySlug: "tipos-de-dividas",
     date: "22 Fev 2026",
     readTime: "6 min",
     author: "Equipe Tele Sena",
@@ -574,6 +621,7 @@ export const posts: Post[] = [
     image: contasImg,
     category: "Sair das Dívidas",
     categorySlug: "sair-das-dividas",
+    subcategorySlug: "dicas-para-renegociar",
     date: "19 Fev 2026",
     readTime: "7 min",
     author: "Equipe Tele Sena",
@@ -594,11 +642,12 @@ export const posts: Post[] = [
     image: organizarImg,
     category: "Sair das Dívidas",
     categorySlug: "sair-das-dividas",
+    subcategorySlug: "dicas-para-renegociar",
     date: "15 Fev 2026",
     readTime: "5 min",
     author: "Equipe Tele Sena",
   },
-  // --- Pagar as Contas ---
+  // --- Organizar as Finanças (Pagamentos e contas) ---
   {
     id: "18",
     slug: "como-reduzir-conta-de-luz",
@@ -613,8 +662,9 @@ export const posts: Post[] = [
 <h2>3. Use a tarifa social</h2>
 <p>Famílias de baixa renda podem ter desconto de até 65% na conta de luz pelo programa Tarifa Social.</p>`,
     image: contasImg,
-    category: "Pagar as Contas",
-    categorySlug: "pagar-as-contas",
+    category: "Organizar as Finanças",
+    categorySlug: "organizar-as-financas",
+    subcategorySlug: "dicas-para-economizar",
     date: "21 Fev 2026",
     readTime: "5 min",
     author: "Equipe Tele Sena",
@@ -633,8 +683,9 @@ export const posts: Post[] = [
 <h2>Monte um calendário de pagamentos</h2>
 <p>Organize todas as datas de vencimento em uma planilha ou app para não esquecer nenhuma conta.</p>`,
     image: dividasImg,
-    category: "Pagar as Contas",
-    categorySlug: "pagar-as-contas",
+    category: "Organizar as Finanças",
+    categorySlug: "organizar-as-financas",
+    subcategorySlug: "pagamentos-e-contas",
     date: "17 Fev 2026",
     readTime: "6 min",
     author: "Equipe Tele Sena",
@@ -651,8 +702,9 @@ export const posts: Post[] = [
 <p>Ligue para as empresas e peça para alterar a data de vencimento para próximo ao dia do pagamento.</p>
 <div class="highlight-tip"><strong>💡 Dica:</strong> Tente concentrar todas as contas entre os dias 5 e 10 do mês, logo após o pagamento!</div>`,
     image: organizarImg,
-    category: "Pagar as Contas",
-    categorySlug: "pagar-as-contas",
+    category: "Organizar as Finanças",
+    categorySlug: "organizar-as-financas",
+    subcategorySlug: "pagamentos-e-contas",
     date: "13 Fev 2026",
     readTime: "4 min",
     author: "Equipe Tele Sena",
@@ -674,6 +726,7 @@ export const posts: Post[] = [
     image: premiosImg,
     category: "Entender a Tele Sena",
     categorySlug: "entender-a-tele-sena",
+    subcategorySlug: "como-funciona",
     date: "23 Fev 2026",
     readTime: "5 min",
     author: "Equipe Tele Sena",
@@ -694,6 +747,7 @@ export const posts: Post[] = [
     image: heroImg,
     category: "Entender a Tele Sena",
     categorySlug: "entender-a-tele-sena",
+    subcategorySlug: "como-funciona",
     date: "16 Fev 2026",
     readTime: "4 min",
     author: "Equipe Tele Sena",
@@ -714,6 +768,7 @@ export const posts: Post[] = [
     image: sonhoImg,
     category: "Entender a Tele Sena",
     categorySlug: "entender-a-tele-sena",
+    subcategorySlug: "o-que-e",
     date: "12 Fev 2026",
     readTime: "6 min",
     author: "Equipe Tele Sena",
@@ -735,6 +790,17 @@ export function resolveCategory(slug: string): string {
 
 export function getPostsByCategory(categorySlug: string): Post[] {
   return posts.filter((p) => resolveCategory(p.categorySlug) === categorySlug);
+}
+
+export function getPostsBySubcategory(categorySlug: string, subcategorySlug: string): Post[] {
+  return posts.filter(
+    (p) => resolveCategory(p.categorySlug) === categorySlug && p.subcategorySlug === subcategorySlug
+  );
+}
+
+export function getSubcategory(categorySlug: string, subcategorySlug: string): Subcategory | undefined {
+  const cat = categories.find((c) => c.slug === categorySlug);
+  return cat?.subcategories.find((s) => s.slug === subcategorySlug);
 }
 
 export function getPostBySlug(slug: string): Post | undefined {

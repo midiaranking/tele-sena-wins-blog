@@ -5,6 +5,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import Index from "./pages/Index.tsx";
 import CategoryPage from "./pages/CategoryPage.tsx";
+import SubcategoryPage from "./pages/SubcategoryPage.tsx";
 import PostPage from "./pages/PostPage.tsx";
 import EquipePage from "./pages/EquipePage.tsx";
 import NotFound from "./pages/NotFound.tsx";
@@ -20,6 +21,7 @@ const App = () => (
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/categoria/:slug" element={<CategoryPage />} />
+          <Route path="/categoria/:slug/:subSlug" element={<SubcategoryPage />} />
           <Route path="/post/:slug" element={<PostPage />} />
           <Route path="/equipe" element={<EquipePage />} />
           <Route path="*" element={<NotFound />} />

@@ -2,76 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Search, Menu, X, ChevronDown } from "lucide-react";
 import logo from "@/assets/logo-telesena.png";
-
-interface MenuItem {
-  name: string;
-  slug?: string;
-  href?: string;
-}
-
-interface MenuGroup {
-  label: string;
-  items: MenuItem[];
-}
-
-const menuGroups: MenuGroup[] = [
-  {
-    label: "Tele Sena",
-    items: [
-      { name: "Conheça Tele Sena", href: "https://www.telesena.com.br/conheca-as-telesenas" },
-      { name: "Concorrer a Prêmios", href: "https://www.telesena.com.br/comprar" },
-      { name: "Realizar um Sonho", href: "https://www.telesena.com.br/" },
-      { name: "Contato", href: "https://atendimento.telesena.com.br/#/" },
-    ],
-  },
-  {
-    label: "Quite Dívidas",
-    items: [
-      { name: "Pagar as Contas", slug: "pagar-as-contas" },
-      { name: "Sair das Dívidas", slug: "sair-das-dividas" },
-    ],
-  },
-  {
-    label: "Ganhe Mais",
-    items: [
-      { name: "Ganhar Dinheiro", slug: "ganhar-dinheiro" },
-    ],
-  },
-  {
-    label: "Economize",
-    items: [
-      { name: "Organizar as Finanças", slug: "organizar-as-financas" },
-      { name: "Guardar Dinheiro", slug: "guardar-dinheiro" },
-    ],
-  },
-  {
-    label: "Invista",
-    items: [
-      { name: "Começar a Investir", slug: "comecar-a-investir" },
-    ],
-  },
-  {
-    label: "Planeje",
-    items: [
-      { name: "Planejar o Futuro", slug: "planejar-o-futuro" },
-    ],
-  },
-];
-
-const MenuItemLink = ({ item, className, onClick }: { item: MenuItem; className?: string; onClick?: () => void }) => {
-  if (item.href) {
-    return (
-      <a href={item.href} target="_blank" rel="noopener noreferrer" className={className} onClick={onClick}>
-        {item.name}
-      </a>
-    );
-  }
-  return (
-    <Link to={`/categoria/${item.slug}`} className={className} onClick={onClick}>
-      {item.name}
-    </Link>
-  );
-};
+import { categories } from "@/data/posts";
 
 const BlogHeader = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -85,7 +16,7 @@ const BlogHeader = () => {
           <img src={logo} alt="Tele Sena" className="h-14 md:h-16" />
         </Link>
 
-        {/* Search - visible on all sizes */}
+        {/* Search */}
         <div className="flex flex-1 max-w-xl relative">
           <div className="flex items-center w-full bg-secondary rounded-full border border-border overflow-hidden">
             <Search className="ml-3 md:ml-4 w-4 h-4 md:w-5 md:h-5 text-primary shrink-0" />
@@ -117,33 +48,40 @@ const BlogHeader = () => {
         </div>
       </div>
 
-      {/* Bottom row: grouped nav */}
+      {/* Bottom row: category nav with subcategory dropdowns */}
       <div className="hidden lg:block border-t border-border">
         <nav className="container mx-auto flex items-center justify-center gap-1 py-2">
-          {menuGroups.map((group) =>
-            group.items.length === 1 ? (
-              <MenuItemLink
-                key={group.label}
-                item={group.items[0]}
-                className="px-4 py-2 text-sm font-medium text-foreground hover:text-primary transition-colors"
-              />
-            ) : (
-              <div key={group.label} className="relative group">
-                <button className="flex items-center gap-1 px-4 py-2 text-sm font-medium text-foreground hover:text-primary transition-colors">
-                  {group.label} <ChevronDown className="w-3.5 h-3.5" />
-                </button>
-                <div className="absolute top-full left-0 mt-1 bg-background rounded-xl ts-shadow border border-border py-2 min-w-[220px] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-50">
-                  {group.items.map((item) => (
-                    <MenuItemLink
-                      key={item.slug || item.href}
-                      item={item}
-                      className="block px-5 py-2.5 text-sm text-foreground hover:text-primary hover:bg-secondary transition-colors"
-                    />
-                  ))}
-                </div>
+          {categories.map((cat) => (
+            <div key={cat.slug} className="relative group">
+              <Link
+                to={`/categoria/${cat.slug}`}
+                className="flex items-center gap-1 px-4 py-2 text-sm font-medium text-foreground hover:text-primary transition-colors"
+              >
+                {cat.name} <ChevronDown className="w-3.5 h-3.5" />
+              </Link>
+              <div className="absolute top-full left-0 mt-1 bg-background rounded-xl ts-shadow border border-border py-2 min-w-[220px] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-50">
+                {cat.subcategories.map((sub) => (
+                  <Link
+                    key={sub.slug}
+                    to={`/categoria/${cat.slug}/${sub.slug}`}
+                    className="block px-5 py-2.5 text-sm text-foreground hover:text-primary hover:bg-secondary transition-colors"
+                  >
+                    {sub.name}
+                  </Link>
+                ))}
               </div>
-            )
-          )}
+            </div>
+          ))}
+
+          {/* External links */}
+          <a
+            href="https://atendimento.telesena.com.br/#/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="px-4 py-2 text-sm font-medium text-foreground hover:text-primary transition-colors"
+          >
+            Contato
+          </a>
         </nav>
       </div>
 
@@ -151,21 +89,36 @@ const BlogHeader = () => {
       {mobileOpen && (
         <div className="lg:hidden border-t border-border bg-background">
           <nav className="container mx-auto py-4 flex flex-col gap-1">
-            {menuGroups.map((group) => (
-              <div key={group.label}>
-                <div className="px-4 py-2 text-xs font-semibold text-muted-foreground uppercase tracking-wider">
-                  {group.label}
-                </div>
-                {group.items.map((item) => (
-                  <MenuItemLink
-                    key={item.slug || item.href}
-                    item={item}
+            {categories.map((cat) => (
+              <div key={cat.slug}>
+                <Link
+                  to={`/categoria/${cat.slug}`}
+                  onClick={() => setMobileOpen(false)}
+                  className="block px-4 py-2 text-sm font-semibold text-foreground hover:text-primary"
+                >
+                  {cat.name}
+                </Link>
+                {cat.subcategories.map((sub) => (
+                  <Link
+                    key={sub.slug}
+                    to={`/categoria/${cat.slug}/${sub.slug}`}
                     onClick={() => setMobileOpen(false)}
-                    className="block px-6 py-2.5 text-sm font-medium text-foreground hover:text-primary hover:bg-secondary rounded-lg transition-colors"
-                  />
+                    className="block px-8 py-2 text-sm text-muted-foreground hover:text-primary transition-colors"
+                  >
+                    {sub.name}
+                  </Link>
                 ))}
               </div>
             ))}
+            <a
+              href="https://atendimento.telesena.com.br/#/"
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => setMobileOpen(false)}
+              className="block px-4 py-2 text-sm font-semibold text-foreground hover:text-primary"
+            >
+              Contato
+            </a>
             <a
               href="https://telesena.com.br"
               target="_blank"
